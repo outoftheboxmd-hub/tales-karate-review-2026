@@ -893,4 +893,28 @@ body{background:#050506!important}
  track.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();
 })();</script>
 
-</body></html>
+<script id="tales-original-video-audio-control">
+(function(){
+  const videos=Array.from(document.querySelectorAll('video'));
+  const pauseOtherVideos=function(playing){
+    for(const video of videos){
+      if(video!==playing && !video.paused) video.pause();
+    }
+  };
+  document.addEventListener('play',function(event){
+    if(event.target instanceof HTMLVideoElement) pauseOtherVideos(event.target);
+  },true);
+  const pauseHiddenVideos=function(){
+    for(const video of videos){
+      const panel=video.closest('.route-panel');
+      if(panel && panel.hasAttribute('hidden') && !video.paused) video.pause();
+    }
+  };
+  const observer=new MutationObserver(pauseHiddenVideos);
+  document.querySelectorAll('.route-panel').forEach(function(panel){
+    observer.observe(panel,{attributes:true,attributeFilter:['hidden']});
+  });
+  window.addEventListener('hashchange',function(){requestAnimationFrame(pauseHiddenVideos)});
+  pauseHiddenVideos();
+})();
+</script></body></html>
