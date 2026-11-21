@@ -923,7 +923,10 @@ body{background:#050506!important}
  const pages=new Set(views.map(v=>v.dataset.route));
  const title={'home':'Home','programs':'Programs','meet-sensei':'Meet the Sensei','tale-dynasty':'Tale Dynasty','our-team':'Our Team','schedule':'Class Schedule','get-started':'Get Started','our-approach':'Our Approach','contact':'Contact'};
  const update=()=>{
-   const k=decodeURIComponent(location.hash.slice(1)).split('?')[0];
+   const hashRoute=decodeURIComponent(location.hash.slice(1)).split('?')[0];
+   const pathRoutes={'programs':'programs','fall-schedule':'schedule','our-team':'our-team','tale-dynasty':'tale-dynasty','contact':'contact'};
+   const pathRoute=pathRoutes[location.pathname.replace(/\\/+$/,'').split('/').pop()];
+   const k=hashRoute || (document.getElementById('otb-approved-site') ? (pathRoute||'') : '');
    if(k==='main'){document.getElementById('main')?.focus();return}
    if(!pages.has(k)&&k!==''){const match=document.getElementById(k);if(match){match.scrollIntoView({behavior:'smooth'});return}}
    const route=pages.has(k)?k:'home';
