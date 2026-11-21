@@ -930,7 +930,7 @@ body{background:#050506!important}
    for(const v of views){v.hidden=v.dataset.route!==route;}
    document.querySelectorAll('a[aria-current="page"]').forEach(x=>x.removeAttribute('aria-current'));
    document.querySelectorAll('a[href="#'+CSS.escape(route)+'"]').forEach(x=>{if(x.closest('.site-nav'))x.setAttribute('aria-current','page')});
-   document.title=(title[route]||route.split('-').map(x=>x[0].toUpperCase()+x.slice(1)).join(' '))+' | Tale’s Sport Karate USA — Design Preview';
+   if(!document.getElementById('otb-approved-site')) document.title=(title[route]||route.split('-').map(x=>x[0].toUpperCase()+x.slice(1)).join(' '))+' | Tale’s Sport Karate USA — Design Preview';
    document.querySelectorAll('.has-submenu.open').forEach(x=>{x.classList.remove('open');x.querySelector('.submenu-trigger')?.setAttribute('aria-expanded','false')});
    if(location.hash!=='#main')window.scrollTo({top:0,behavior:'instant'});
  };
@@ -979,4 +979,17 @@ body{background:#050506!important}
   window.addEventListener('hashchange',function(){requestAnimationFrame(pauseHiddenVideos)});
   pauseHiddenVideos();
 })();
-</script></body></html>
+</script>
+<script id="otb-squarespace-copy-cleanup">
+(function(){
+ const root=document.getElementById('otb-approved-site');
+ if(!root)return;
+ const intro=root.querySelector('.start-v6-form > p:not(.eyebrow-v6)');
+ if(intro)intro.textContent='Questions about classes or enrollment? Use the school’s official sign-up page to contact the team.';
+ const fallback=root.querySelector('.v7-reviews-fallback');
+ if(fallback)fallback.textContent='Google reviews will appear here when available.';
+ const disclosure=root.querySelector('.start-v6-disclosure');
+ if(disclosure)disclosure.textContent='Use the school’s official sign-up page to send an inquiry.';
+})();
+</script>
+</body></html>
