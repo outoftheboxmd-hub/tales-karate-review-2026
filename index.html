@@ -619,11 +619,21 @@ body{background:#050506!important}
 </style>
 
 <style id="otb-squarespace-contrast-fix">
-/* Applies only when this approved layout is mounted inside Squarespace. No change to the approved GitHub preview. */
+/* Scoped corrections for Squarespace only; preserve the approved external preview. */
 #otb-approved-site h1,
 #otb-approved-site h2,
 #otb-approved-site h3,
-#otb-approved-site h4{color:inherit!important}
+#otb-approved-site h4 {color:inherit!important}
+@media(max-width:560px){
+ #otb-approved-site .site-header .mobile-menu {
+   display:block!important;visibility:visible!important;opacity:1!important;
+   position:absolute!important;right:16px!important;top:13px!important;
+   width:40px!important;height:40px!important;z-index:1100!important;
+   border:1px solid #8eb6dc!important;background:#0c1621!important;
+ }
+ #otb-approved-site .site-header .site-nav.open {display:flex!important;z-index:1099!important}
+ #otb-approved-site .v7-hero .hero-brandmark {display:none!important}
+}
 </style>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 <div class="v7-topline"><span>KARATE CLASSES IN RED BANK, NJ</span><b aria-hidden="true">|</b><span>HAWAIIAN KENPO &amp; SPORT KARATE</span><b aria-hidden="true">|</b><span>GROWING AT EVERY STAGE</span></div>
