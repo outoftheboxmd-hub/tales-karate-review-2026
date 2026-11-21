@@ -995,4 +995,47 @@ body{background:#050506!important}
  if(disclosure)disclosure.textContent='Use the school’s official sign-up page to send an inquiry.';
 })();
 </script>
+<script id="otb-live-local-seo">
+(function(){
+ const root=document.getElementById('otb-approved-site');
+ if(!root)return;
+ const descriptions={
+  home:['Karate Classes in Red Bank, NJ | Tale’s Sport Karate USA','Discover Hawaiian Kenpo and karate classes for children, teens and adults in Red Bank, NJ. Explore programs, meet the instructors and ask about enrollment.'],
+  programs:['Kenpo Karate Programs in Red Bank, NJ | Tale’s Sport Karate','Explore karate and Hawaiian Kenpo programs for kids, teens and adults at Tale’s Sport Karate USA in Red Bank, NJ. Find a class that fits your family.'],
+  schedule:['Karate Class Schedule in Red Bank, NJ | Tale’s Sport Karate','See class schedule information for Tale’s Sport Karate USA in Red Bank, NJ. Contact the school to confirm current karate and Kenpo class times.'],
+  'our-team':['Karate Instructors & School Community | Tale’s Sport Karate','Meet the people behind Tale’s Sport Karate USA, including instructors and the school community supporting students in Red Bank, New Jersey.'],
+  'tale-dynasty':['Tale Family Karate History | Tale’s Sport Karate USA','Learn about the Tale family’s martial arts history and the people who have helped shape Tale’s Sport Karate USA in Red Bank, New Jersey.'],
+  contact:['Contact Tale’s Sport Karate USA | Red Bank, NJ','Have a question about karate classes in Red Bank, NJ? Contact Tale’s Sport Karate USA to learn about programs, schedules and getting started.']
+ };
+ const byPath={'programs':'programs','fall-schedule':'schedule','our-team':'our-team','tale-dynasty':'tale-dynasty','contact':'contact'};
+ const setMeta=(selector,attr,val)=>{
+  let el=document.head.querySelector(selector);
+  if(!el){el=document.createElement('meta');if(attr==='content'&&selector.includes('property=')){el.setAttribute('property',selector.match(/property="([^"]+)"/)[1]);}else if(selector.includes('name=')){el.setAttribute('name',selector.match(/name="([^"]+)"/)[1]);}document.head.appendChild(el);}
+  el.setAttribute(attr,val);
+ };
+ function update(){
+   const h=decodeURIComponent(location.hash.slice(1)).split('?')[0];
+   const key=(descriptions[h]?h:byPath[location.pathname.split('/').filter(Boolean).pop()])||'home';
+   const [title,description]=descriptions[key];
+   document.title=title;
+   setMeta('meta[name="description"]','content',description);
+   setMeta('meta[property="og:title"]','content',title);
+   setMeta('meta[property="og:description"]','content',description);
+   setMeta('meta[property="og:url"]','content','https://www.talessportkarate.com'+(location.pathname==='/'?'':location.pathname));
+   setMeta('meta[name="twitter:title"]','content',title);
+   setMeta('meta[name="twitter:description"]','content',description);
+ }
+ update();window.addEventListener('hashchange',update);
+ if(!document.getElementById('otb-verified-business-schema')){
+   const data={'@context':'https://schema.org','@type':'SportsActivityLocation',
+      'name':'Tale’s Sport Karate USA','url':'https://www.talessportkarate.com/',
+      'description':'Karate and Hawaiian Kenpo classes for children, teenagers and adults in Red Bank, New Jersey.',
+      'address':{'@type':'PostalAddress','addressLocality':'Red Bank','addressRegion':'NJ','addressCountry':'US'},
+      'areaServed':{'@type':'Place','name':'Monmouth County, New Jersey'},
+      'image':'https://images.squarespace-cdn.com/content/v1/6a80ea13a54d0f6c0b6a5476/3692b585-c88c-4af6-a531-71e8c35b4f69/Screenshot+2026-08-15+at+9.20.39%E2%80%AFPM.png?format=1500w',
+      'sameAs':['https://www.facebook.com/profile.php?id=61593007397783','https://www.instagram.com/talessportkarateusa/']};
+   const tag=document.createElement('script');tag.type='application/ld+json';tag.id='otb-verified-business-schema';tag.textContent=JSON.stringify(data);document.head.appendChild(tag);
+ }
+})();
+</script>
 </body></html>
